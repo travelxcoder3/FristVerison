@@ -150,24 +150,15 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 p-8">
-            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-emerald-100 p-8">
-                {{ $slot }}
+        <div class="flex-1">
+            <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-emerald-100 p-8">
+                    {{ $slot }}
+                </div>
             </div>
         </div>
     </div>
 
     @livewireScripts
-    <script>
-        // Ensure Livewire is working
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded');
-            if (typeof Livewire !== 'undefined') {
-                console.log('Livewire is available');
-            } else {
-                console.error('Livewire is not available');
-            }
-        });
-    </script>
 </body>
 </html> 

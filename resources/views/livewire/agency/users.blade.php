@@ -100,85 +100,71 @@
     </div>
     @endif
 
-    <!-- Users Table -->
-    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <!-- Users Table (desktop/tablet) -->
+    <div class="bg-white rounded-lg shadow-md overflow-x-auto hidden sm:block">
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="min-w-full divide-y divide-gray-200 text-xs sm:text-sm">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            المستخدم
-                        </th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            البريد الإلكتروني
-                        </th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            نوع المستخدم
-                        </th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            الدور
-                        </th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            الحالة
-                        </th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            تاريخ الإضافة
-                        </th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            الإجراءات
-                        </th>
+                        <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">المستخدم</th>
+                        <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">البريد الإلكتروني</th>
+                        <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">نوع المستخدم</th>
+                        <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الدور</th>
+                        <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الحالة</th>
+                        <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">تاريخ الإضافة</th>
+                        <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الإجراءات</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse($users as $user)
                         <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-2 sm:px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <div class="h-10 w-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3">
+                                    <div class="h-8 w-8 sm:h-10 sm:w-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3">
                                         <span class="text-emerald-600 font-semibold">{{ substr($user->name, 0, 1) }}</span>
                                     </div>
                                     <div>
-                                        <div class="text-sm font-medium text-gray-900">{{ $user->name }}</div>
+                                        <div class="text-xs sm:text-sm font-medium text-gray-900">{{ $user->name }}</div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <td class="px-2 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
                                 {{ $user->email }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-2 sm:px-6 py-4 whitespace-nowrap">
                                 <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full 
                                     {{ $user->user_type === 'agency_admin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800' }}">
                                     {{ $user->user_type === 'agency_admin' ? 'مدير وكالة' : 'مستخدم عادي' }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-2 sm:px-6 py-4 whitespace-nowrap">
                                 @if($user->role)
                                     <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
                                         {{ $user->role->name }}
                                     </span>
                                 @else
-                                    <span class="text-sm text-gray-500">بدون دور</span>
+                                    <span class="text-xs sm:text-sm text-gray-500">بدون دور</span>
                                 @endif
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-2 sm:px-6 py-4 whitespace-nowrap">
                                 <button wire:click="toggleUserStatus({{ $user->id }})" 
                                         class="inline-flex px-2 py-1 text-xs font-semibold rounded-full 
                                         {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                                     {{ $user->is_active ? 'نشط' : 'غير نشط' }}
                                 </button>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <td class="px-2 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
                                 {{ $user->created_at->format('Y-m-d') }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <div class="flex flex-row items-center justify-center gap-8">
+                            <td class="px-2 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium">
+                                <div class="flex flex-row items-center justify-center gap-2 sm:gap-8">
                                     <button wire:click="editUser({{ $user->id }})"
-                                        class="transition px-4 py-1 rounded-lg font-medium text-emerald-600 hover:text-white hover:bg-emerald-500 border border-emerald-100 hover:border-emerald-500">
+                                        class="transition px-2 sm:px-4 py-1 rounded-lg font-medium text-emerald-600 hover:text-white hover:bg-emerald-500 border border-emerald-100 hover:border-emerald-500 text-xs sm:text-sm">
                                         تعديل
                                     </button>
                                     <button wire:click="deleteUser({{ $user->id }})"
                                         onclick="return confirm('هل أنت متأكد من حذف هذا المستخدم؟')"
-                                        class="transition px-4 py-1 rounded-lg font-medium text-red-600 hover:text-white hover:bg-red-500 border border-red-100 hover:border-red-500">
+                                        class="transition px-2 sm:px-4 py-1 rounded-lg font-medium text-red-600 hover:text-white hover:bg-red-500 border border-red-100 hover:border-red-500 text-xs sm:text-sm">
                                         حذف
                                     </button>
                                 </div>
@@ -186,7 +172,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">
+                            <td colspan="7" class="px-2 sm:px-6 py-4 text-center text-gray-500">
                                 لا يوجد مستخدمين مسجلين حالياً
                             </td>
                         </tr>
@@ -194,10 +180,61 @@
                 </tbody>
             </table>
         </div>
-        
-        <!-- Pagination -->
         @if($users->hasPages())
             <div class="px-6 py-3 border-t border-gray-200">
+                {{ $users->links() }}
+            </div>
+        @endif
+    </div>
+
+    <!-- Users Cards (mobile) -->
+    <div class="block sm:hidden space-y-4">
+        @forelse($users as $user)
+            <div class="bg-white rounded-lg shadow p-4 flex flex-col gap-2">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="h-10 w-10 bg-emerald-100 rounded-full flex items-center justify-center">
+                        <span class="text-emerald-600 font-semibold">{{ substr($user->name, 0, 1) }}</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-gray-800">{{ $user->name }}</div>
+                        <div class="text-xs text-gray-500">{{ $user->email }}</div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2 text-xs">
+                    <span class="inline-flex px-2 py-1 font-semibold rounded-full {{ $user->user_type === 'agency_admin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800' }}">
+                        {{ $user->user_type === 'agency_admin' ? 'مدير وكالة' : 'مستخدم عادي' }}
+                    </span>
+                    @if($user->role)
+                        <span class="inline-flex px-2 py-1 font-semibold rounded-full bg-gray-100 text-gray-800">
+                            {{ $user->role->name }}
+                        </span>
+                    @else
+                        <span class="text-gray-500">بدون دور</span>
+                    @endif
+                    <span class="inline-flex px-2 py-1 font-semibold rounded-full {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                        {{ $user->is_active ? 'نشط' : 'غير نشط' }}
+                    </span>
+                    <span class="text-gray-500">تاريخ الإضافة: {{ $user->created_at->format('Y-m-d') }}</span>
+                </div>
+                <div class="flex gap-2 mt-2">
+                    <button wire:click="editUser({{ $user->id }})"
+                        class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-1 rounded-lg text-xs font-bold transition">
+                        تعديل
+                    </button>
+                    <button wire:click="deleteUser({{ $user->id }})"
+                        onclick="return confirm('هل أنت متأكد من حذف هذا المستخدم؟')"
+                        class="flex-1 bg-red-500 hover:bg-red-600 text-white py-1 rounded-lg text-xs font-bold transition">
+                        حذف
+                    </button>
+                </div>
+            </div>
+        @empty
+            <div class="bg-white rounded-lg shadow p-4 text-center text-gray-500">
+                لا يوجد مستخدمين مسجلين حالياً
+            </div>
+        @endforelse
+        @if($users->hasPages())
+            <div class="mt-4">
                 {{ $users->links() }}
             </div>
         @endif

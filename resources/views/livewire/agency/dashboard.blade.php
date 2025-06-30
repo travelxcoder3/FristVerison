@@ -44,7 +44,7 @@
     @endif
 
     <!-- Statistics Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Users Statistics -->
         @if(isset($permissionStats['users']))
         <div class="bg-white rounded-lg shadow-md p-6">
@@ -122,11 +122,11 @@
     @if($user->isAgencyAdmin())
     <div class="bg-white rounded-lg shadow-md p-6">
         <h2 class="text-xl font-bold text-gray-800 mb-4">إجراءات سريعة</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             @if($user->hasPermission('users.create'))
             <a href="{{ route('agency.users') }}" 
-               class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-emerald-50 hover:border-emerald-300 transition duration-200">
-                <div class="p-2 rounded-full bg-blue-100 text-blue-600 mr-4">
+               class="flex flex-col sm:flex-row items-start sm:items-center p-4 border border-gray-200 rounded-lg hover:bg-emerald-50 hover:border-emerald-300 transition duration-200">
+                <div class="p-2 rounded-full bg-blue-100 text-blue-600 mb-2 sm:mb-0 sm:mr-4">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg>
@@ -140,8 +140,8 @@
             
             @if($user->hasPermission('roles.create'))
             <a href="{{ route('agency.roles') }}" 
-               class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-emerald-50 hover:border-emerald-300 transition duration-200">
-                <div class="p-2 rounded-full bg-purple-100 text-purple-600 mr-4">
+               class="flex flex-col sm:flex-row items-start sm:items-center p-4 border border-gray-200 rounded-lg hover:bg-emerald-50 hover:border-emerald-300 transition duration-200">
+                <div class="p-2 rounded-full bg-purple-100 text-purple-600 mb-2 sm:mb-0 sm:mr-4">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                     </svg>
@@ -155,8 +155,8 @@
 
             @if($user->hasPermission('services.create'))
             <a href="{{ route('agency.services') }}" 
-               class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-emerald-50 hover:border-emerald-300 transition duration-200">
-                <div class="p-2 rounded-full bg-emerald-100 text-emerald-600 mr-4">
+               class="flex flex-col sm:flex-row items-start sm:items-center p-4 border border-gray-200 rounded-lg hover:bg-emerald-50 hover:border-emerald-300 transition duration-200">
+                <div class="p-2 rounded-full bg-emerald-100 text-emerald-600 mb-2 sm:mb-0 sm:mr-4">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg>
@@ -175,30 +175,28 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Recent Users -->
         @if(isset($permissionStats['users']))
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-200">
-                <div class="flex justify-between items-center">
+        <div class="bg-white rounded-lg shadow-md overflow-x-auto">
+            <div class="px-4 sm:px-6 py-4 border-b border-gray-200">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                     <h2 class="text-xl font-bold text-gray-800">آخر المستخدمين المضافة</h2>
                     @if($user->hasPermission('users.view'))
-                    <a href="{{ route('agency.users') }}" class="text-emerald-600 hover:text-emerald-700 text-sm font-medium">
-                        عرض الكل
-                    </a>
+                    <a href="{{ route('agency.users') }}" class="text-emerald-600 hover:text-emerald-700 text-sm font-medium">عرض الكل</a>
                     @endif
                 </div>
             </div>
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
+                <table class="min-w-full divide-y divide-gray-200 text-sm">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">المستخدم</th>
-                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الدور</th>
-                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الحالة</th>
+                            <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">المستخدم</th>
+                            <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الدور</th>
+                            <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الحالة</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         @forelse($permissionStats['users']['recent'] as $user)
                             <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-2 sm:px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="h-8 w-8 bg-emerald-100 rounded-full flex items-center justify-center mr-3">
                                             <span class="text-emerald-600 font-semibold text-sm">{{ substr($user->name, 0, 1) }}</span>
@@ -209,7 +207,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-2 sm:px-6 py-4 whitespace-nowrap">
                                     @if($user->role)
                                         <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">
                                             {{ $user->role->display_name }}
@@ -218,7 +216,7 @@
                                         <span class="text-xs text-gray-500">بدون دور</span>
                                     @endif
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-2 sm:px-6 py-4 whitespace-nowrap">
                                     @if($user->is_active)
                                         <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">نشط</span>
                                     @else

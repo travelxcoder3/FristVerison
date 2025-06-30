@@ -7,7 +7,7 @@
 
     <!-- Agency Info -->
     <div class="bg-white rounded-lg shadow-md p-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">معلومات الوكالة</h2>
                 <div class="space-y-3">

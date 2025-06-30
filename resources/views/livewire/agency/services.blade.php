@@ -9,33 +9,34 @@
         <button wire:click="showAddModal" class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-lg font-bold shadow transition">إضافة خدمة جديدة</button>
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow">
-        <table class="min-w-full bg-white">
+    <!-- Services Table (desktop/tablet) -->
+    <div class="overflow-x-auto rounded-lg shadow hidden sm:block">
+        <table class="min-w-full bg-white text-sm">
             <thead>
                 <tr class="bg-emerald-50 text-emerald-700">
-                    <th class="py-3 px-4 text-right">#</th>
-                    <th class="py-3 px-4 text-right">اسم الخدمة</th>
-                    <th class="py-3 px-4 text-right">الوصف</th>
-                    <th class="py-3 px-4 text-right">السعر</th>
-                    <th class="py-3 px-4 text-right">صورة</th>
-                    <th class="py-3 px-4 text-right">إجراءات</th>
+                    <th class="py-3 px-2 sm:px-4 text-right">#</th>
+                    <th class="py-3 px-2 sm:px-4 text-right">اسم الخدمة</th>
+                    <th class="py-3 px-2 sm:px-4 text-right">الوصف</th>
+                    <th class="py-3 px-2 sm:px-4 text-right">السعر</th>
+                    <th class="py-3 px-2 sm:px-4 text-right">صورة</th>
+                    <th class="py-3 px-2 sm:px-4 text-right">إجراءات</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($services as $service)
                     <tr class="border-b hover:bg-emerald-50/30">
-                        <td class="py-2 px-4">{{ $loop->iteration }}</td>
-                        <td class="py-2 px-4 font-bold">{{ $service->name }}</td>
-                        <td class="py-2 px-4">{{ $service->description }}</td>
-                        <td class="py-2 px-4">{{ number_format($service->price, 2) }} $</td>
-                        <td class="py-2 px-4">
+                        <td class="py-2 px-2 sm:px-4">{{ $loop->iteration }}</td>
+                        <td class="py-2 px-2 sm:px-4 font-bold">{{ $service->name }}</td>
+                        <td class="py-2 px-2 sm:px-4">{{ $service->description }}</td>
+                        <td class="py-2 px-2 sm:px-4">{{ number_format($service->price, 2) }} $</td>
+                        <td class="py-2 px-2 sm:px-4">
                             @if($service->image)
                                 <img src="{{ $service->image }}" alt="صورة الخدمة" class="h-12 w-12 object-cover rounded">
                             @else
                                 <span class="text-gray-400">لا يوجد</span>
                             @endif
                         </td>
-                        <td class="py-2 px-4 flex gap-2">
+                        <td class="py-2 px-2 sm:px-4 flex gap-2">
                             <button wire:click="showEditModal({{ $service->id }})" class="bg-teal-400 hover:bg-teal-500 text-white px-3 py-1 rounded shadow text-xs">تعديل</button>
                             <button wire:click="deleteService({{ $service->id }})" class="bg-red-400 hover:bg-red-500 text-white px-3 py-1 rounded shadow text-xs" onclick="return confirm('هل أنت متأكد من حذف الخدمة؟')">حذف</button>
                         </td>
@@ -47,6 +48,30 @@
                 @endforelse
             </tbody>
         </table>
+    </div>
+
+    <!-- Services Cards (mobile) -->
+    <div class="block sm:hidden space-y-4">
+        @forelse($services as $service)
+            <div class="bg-white rounded-lg shadow p-4 flex flex-col gap-2">
+                <div class="font-bold text-emerald-700 mb-1">{{ $service->name }}</div>
+                <div class="text-xs text-gray-500 mb-1">{{ $service->description }}</div>
+                <div class="flex flex-wrap gap-2 text-xs mb-1">
+                    <span class="inline-flex px-2 py-1 font-semibold rounded-full bg-gray-100 text-gray-800">{{ number_format($service->price, 2) }} $</span>
+                    @if($service->image)
+                        <img src="{{ $service->image }}" alt="صورة الخدمة" class="h-12 w-12 object-cover rounded">
+                    @else
+                        <span class="text-gray-400">لا يوجد صورة</span>
+                    @endif
+                </div>
+                <div class="flex gap-2 mt-2">
+                    <button wire:click="showEditModal({{ $service->id }})" class="flex-1 bg-teal-400 hover:bg-teal-500 text-white py-1 rounded-lg text-xs font-bold transition">تعديل</button>
+                    <button wire:click="deleteService({{ $service->id }})" class="flex-1 bg-red-400 hover:bg-red-500 text-white py-1 rounded-lg text-xs font-bold transition" onclick="return confirm('هل أنت متأكد من حذف الخدمة؟')">حذف</button>
+                </div>
+            </div>
+        @empty
+            <div class="bg-white rounded-lg shadow p-4 text-center text-gray-400">لا توجد خدمات مسجلة بعد.</div>
+        @endforelse
     </div>
 
     <!-- Modal -->

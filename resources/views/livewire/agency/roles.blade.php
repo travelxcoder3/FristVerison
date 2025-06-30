@@ -90,54 +90,42 @@
     </div>
     @endif
 
-    <!-- Roles Table -->
-    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <!-- Roles Table (desktop/tablet) -->
+    <div class="bg-white rounded-lg shadow-md overflow-x-auto hidden sm:block">
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="min-w-full divide-y divide-gray-200 text-sm">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            اسم الدور
-                        </th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            الوصف
-                        </th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            الصلاحيات
-                        </th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            عدد المستخدمين
-                        </th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            تاريخ الإنشاء
-                        </th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            الإجراءات
-                        </th>
+                        <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">اسم الدور</th>
+                        <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الوصف</th>
+                        <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الصلاحيات</th>
+                        <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">عدد المستخدمين</th>
+                        <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">تاريخ الإنشاء</th>
+                        <th class="px-2 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الإجراءات</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse($roles as $role)
                         <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-2 sm:px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <div class="h-10 w-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                                    <div class="h-8 w-8 sm:h-10 sm:w-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
                                         <svg class="h-5 w-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                                         </svg>
                                     </div>
                                     <div>
-                                        <div class="text-sm font-medium text-gray-900">{{ $role->display_name }}</div>
+                                        <div class="text-xs sm:text-sm font-medium text-gray-900">{{ $role->display_name }}</div>
                                         <div class="text-xs text-gray-500">{{ $role->name }}</div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4">
-                                <div class="text-sm text-gray-900 max-w-xs truncate">
+                            <td class="px-2 sm:px-6 py-4">
+                                <div class="text-xs sm:text-sm text-gray-900 max-w-xs truncate">
                                     {{ $role->description ?: 'لا يوجد وصف' }}
                                 </div>
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-2 sm:px-6 py-4">
                                 <div class="flex flex-wrap gap-1">
                                     @php
                                         $permissions = $role->permissions ?? [];
@@ -159,21 +147,21 @@
                                     @endif
                                 </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <td class="px-2 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
                                 {{ $role->users_count }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <td class="px-2 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
                                 {{ $role->created_at->format('Y-m-d') }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <div class="flex flex-row items-center justify-center gap-8">
+                            <td class="px-2 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium">
+                                <div class="flex flex-row items-center justify-center gap-2 sm:gap-8">
                                     <button wire:click="editRole({{ $role->id }})"
-                                        class="transition px-4 py-1 rounded-lg font-medium text-emerald-600 hover:text-white hover:bg-emerald-500 border border-emerald-100 hover:border-emerald-500">
+                                        class="transition px-2 sm:px-4 py-1 rounded-lg font-medium text-emerald-600 hover:text-white hover:bg-emerald-500 border border-emerald-100 hover:border-emerald-500 text-xs sm:text-sm">
                                         تعديل
                                     </button>
                                     <button wire:click="deleteRole({{ $role->id }})"
                                         onclick="return confirm('هل أنت متأكد من حذف هذا الدور؟')"
-                                        class="transition px-4 py-1 rounded-lg font-medium text-red-600 hover:text-white hover:bg-red-500 border border-red-100 hover:border-red-500">
+                                        class="transition px-2 sm:px-4 py-1 rounded-lg font-medium text-red-600 hover:text-white hover:bg-red-500 border border-red-100 hover:border-red-500 text-xs sm:text-sm">
                                         حذف
                                     </button>
                                 </div>
@@ -181,7 +169,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                            <td colspan="6" class="px-2 sm:px-6 py-4 text-center text-gray-500">
                                 لا يوجد أدوار مسجلة حالياً
                             </td>
                         </tr>
@@ -189,10 +177,74 @@
                 </tbody>
             </table>
         </div>
-        
-        <!-- Pagination -->
         @if($roles->hasPages())
             <div class="px-6 py-3 border-t border-gray-200">
+                {{ $roles->links() }}
+            </div>
+        @endif
+    </div>
+
+    <!-- Roles Cards (mobile) -->
+    <div class="block sm:hidden space-y-4">
+        @forelse($roles as $role)
+            <div class="bg-white rounded-lg shadow p-4 flex flex-col gap-2">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="h-10 w-10 bg-purple-100 rounded-full flex items-center justify-center">
+                        <svg class="h-5 w-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-bold text-gray-800">{{ $role->display_name }}</div>
+                        <div class="text-xs text-gray-500">{{ $role->name }}</div>
+                    </div>
+                </div>
+                <div class="text-xs text-gray-700 mb-1">
+                    {{ $role->description ?: 'لا يوجد وصف' }}
+                </div>
+                <div class="flex flex-wrap gap-1 mb-1">
+                    @php
+                        $permissions = $role->permissions ?? [];
+                        if (is_string($permissions)) {
+                            $permissions = json_decode($permissions, true) ?? [];
+                        } elseif (!is_array($permissions)) {
+                            $permissions = [];
+                        }
+                    @endphp
+                    @foreach(array_slice($permissions, 0, 3) as $permission)
+                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                            {{ $availablePermissions[$permission] ?? $permission }}
+                        </span>
+                    @endforeach
+                    @if(count($permissions) > 3)
+                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
+                            +{{ count($permissions) - 3 }} أكثر
+                        </span>
+                    @endif
+                </div>
+                <div class="flex flex-wrap gap-2 text-xs text-gray-500 mb-1">
+                    <span>عدد المستخدمين: {{ $role->users_count }}</span>
+                    <span>تاريخ الإنشاء: {{ $role->created_at->format('Y-m-d') }}</span>
+                </div>
+                <div class="flex gap-2 mt-2">
+                    <button wire:click="editRole({{ $role->id }})"
+                        class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-1 rounded-lg text-xs font-bold transition">
+                        تعديل
+                    </button>
+                    <button wire:click="deleteRole({{ $role->id }})"
+                        onclick="return confirm('هل أنت متأكد من حذف هذا الدور؟')"
+                        class="flex-1 bg-red-500 hover:bg-red-600 text-white py-1 rounded-lg text-xs font-bold transition">
+                        حذف
+                    </button>
+                </div>
+            </div>
+        @empty
+            <div class="bg-white rounded-lg shadow p-4 text-center text-gray-500">
+                لا يوجد أدوار مسجلة حالياً
+            </div>
+        @endforelse
+        @if($roles->hasPages())
+            <div class="mt-4">
                 {{ $roles->links() }}
             </div>
         @endif
